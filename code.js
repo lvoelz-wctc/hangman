@@ -33,7 +33,7 @@ $(document).ready(
         var num = Math.floor(Math.random()*12);  //number must be 0 through 11 to match array indices
         var gameWord = wordsArray[num];
         var letters = gameWord.split(""); //gives us the array of letters
-
+        var wrongLetters = [];
         var blankWord = "";
         var count = 0;
 
@@ -58,6 +58,13 @@ $(document).ready(
             //count logic here
 
             var revealedWord = ""; //erased at the start of each call
+
+            //add to wrong letter array
+            if (gameWord.includes(guess) === false){
+                wrongLetters.push(guess);
+                $("#wrong").text("Wrong guesses: "+wrongLetters);
+            }
+
             for (var x=0; x<gameWord.length; x++){
                 if (revealedArray[x] === "-"){ //the letter hasn't been guessed yet
                     if (guess === letters[x]){
